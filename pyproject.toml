@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "aicos"
+version = "0.1.0"
+description = "AICOS - AI Company OS: A universal AI-agent-based company framework"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.40.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "websockets>=13.0",
+    "jinja2>=3.1",
+    "aiofiles>=24.0",
+    "python-dotenv>=1.0",
+    "rich>=13.0",
+    "typer>=0.12.0",
+]
+
+[project.scripts]
+aicos = "aicos.cli:app"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24", "ruff>=0.8"]
+email = ["aiosmtplib>=3.0", "aioimaplib>=1.0"]

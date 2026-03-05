@@ -1,0 +1,59 @@
+# ============================================
+# Workflow: Cross-Sell Pipeline
+# ============================================
+# NEXUS AI Cross-Selling zwischen Geschäftsbereichen:
+# Ein Beratungskunde wird zum Entwicklungskunden, ein
+# Entwicklungskunde braucht Marketing etc.
+
+workflow:
+  name: cross_sell_pipeline
+  description: "Cross-Selling Pipeline: Upsell-Erkennung, Qualifizierung, Genehmigung und Umsetzung"
+  version: "1.0"
+  metadata:
+    category: sales
+    estimated_duration_minutes: 60
+    trigger: "Support oder Account Manager identifiziert Upsell-Möglichkeit"
+
+  steps:
+    - id: opportunity_erkennung
+      agent_role: support
+      action: identify_upsell
+      description: >
+        Support identifiziert eine Cross-Sell/Upsell-Möglichkeit bei
+        einem bestehenden Kunden. Dokumentiert: aktueller Service,
+        erkannter Bedarf, Kundenaussagen und geschätztes Potenzial.
+      timeout_minutes: 10
+      retry_count: 2
+
+    - id: lead_qualifizierung
+      agent_role: sales
+      action: qualify_opportunity
+      description: >
+        Sales qualifiziert die Opportunity: Budget vorhanden? Entscheider
+        identifiziert? Timing passend? Bewertet den Deal-Wert und die
+        Abschlusswahrscheinlichkeit. Ordnet dem passenden Geschäftsbereich
+        zu (Consulting/Dev/Marketing/SaaS).
+      input_from: opportunity_erkennung
+      timeout_minutes: 15
+
+    - id: ceo_genehmigung
+      agent_role: ceo
+      action: approve_cross_sell
+      description: >
+        CEO prüft die Cross-Sell-Opportunity auf strategische Passung:
+        Passt der neue Service zum bestehenden Kundenengagement?
+        Gibt es Kapazitäten? Risiko der Überlastung? Genehmigt oder
+        verschiebt auf später.
+      input_from: lead_qualifizierung
+      timeout_minutes: 10
+
+    - id: projekt_start
+      agent_role: operations
+      action: initiate_new_project
+      description: >
+        Operations startet das neue Projekt: Resource Allocation,
+        Timeline erstellen, zuständiges Team briefen und Projekt
+        in die aktive Pipeline aufnehmen. Startet den passenden
+        Delivery-Workflow (ai_solution_delivery oder project_delivery).
+      input_from: ceo_genehmigung
+      timeout_minutes: 15

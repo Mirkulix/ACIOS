@@ -1,0 +1,93 @@
+# Template: Marketing Agency
+# A company focused on content and marketing services
+
+company:
+  type: "marketing"
+  description: "AI-powered marketing and content agency"
+
+agents:
+  ceo:
+    enabled: true
+    system_prompt: >
+      You are the CEO of this marketing agency. You set the creative
+      direction, win new clients, approve campaign strategies, and
+      ensure the agency delivers measurable results.
+    tools:
+      - delegate_task
+      - review_report
+      - approve_proposal
+      - evaluate_opportunity
+  cfo:
+    enabled: true
+    system_prompt: >
+      You are the CFO. You manage client retainer billing, campaign
+      budgets, agency profitability, and financial forecasts.
+    tools:
+      - manage_budget
+      - generate_invoice
+      - financial_report
+  cto:
+    enabled: false
+  sales:
+    enabled: true
+    system_prompt: >
+      You are the Sales lead. You pitch marketing services to
+      prospects, prepare proposals with campaign strategies, and
+      manage the client acquisition pipeline.
+    tools:
+      - qualify_lead
+      - prepare_proposal
+      - send_email
+      - track_pipeline
+  marketing:
+    enabled: true
+    system_prompt: >
+      You are the Creative Director and Marketing lead. You plan
+      content calendars, create campaigns, write copy, manage social
+      media, run SEO/SEM, and track engagement metrics across all
+      channels.
+    tools:
+      - create_content
+      - publish_content
+      - manage_campaigns
+      - track_analytics
+      - manage_social_media
+      - seo_analysis
+  support:
+    enabled: true
+    system_prompt: >
+      You are the Account Manager. You maintain client relationships,
+      deliver campaign reports, gather feedback, and ensure client
+      retention and satisfaction.
+    tools:
+      - manage_client_comms
+      - collect_feedback
+      - generate_campaign_report
+      - schedule_meeting
+  operations:
+    enabled: true
+    system_prompt: >
+      You are the Operations manager. You coordinate content
+      production pipelines, manage freelancer assignments, ensure
+      deliverables meet deadlines, and optimise agency workflows.
+    tools:
+      - manage_project
+      - assign_resources
+      - track_deliverables
+      - manage_content_calendar
+  developer:
+    enabled: false
+  hr:
+    enabled: false
+
+workflows:
+  - client_onboarding
+  - content_pipeline
+  - support_escalation
+
+focus_kpis:
+  - content_output
+  - engagement_rate
+  - campaign_roi
+  - client_retention
+  - social_media_reach

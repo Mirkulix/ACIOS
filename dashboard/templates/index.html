@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS AI - AI Company OS</title>
+    <link rel="stylesheet" href="/static/css/style.css?v=5">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-left">
+        <span class="logo">NEXUS AI</span>
+        <span class="company-name">{{ company_name }}</span>
+    </div>
+    <div class="header-right">
+        <div class="ws-status">
+            <span class="status-dot"></span>
+            <span class="ws-label">Verbinde...</span>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-container">
+
+    <!-- Agent Status Grid -->
+    <section class="section agents-section">
+        <div class="section-header">
+            <span class="section-title">Agent Status</span>
+        </div>
+        <div class="section-body">
+            <div class="agent-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Process Monitor -->
+    <section class="section activity-section">
+        <div class="section-header">
+            <div class="activity-header-left">
+                <span class="activity-live-dot"></span>
+                <span class="section-title">Live Process Monitor</span>
+            </div>
+            <span class="activity-counter" id="activity-count">0 Events</span>
+        </div>
+        <div class="section-body activity-body">
+            <div class="activity-feed" id="activity-feed">
+                <div class="empty-state">Warte auf Agent-Aktivitaet...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Task Board -->
+    <section class="section tasks-section">
+        <div class="section-header">
+            <span class="section-title">Task Board</span>
+            <span class="task-counter" id="task-total">0 Tasks</span>
+        </div>
+        <div class="section-body">
+            <div class="kanban-board">
+                <div class="kanban-column pending">
+                    <div class="kanban-column-header">
+                        Ausstehend <span class="count">0</span>
+                    </div>
+                    <div class="kanban-cards"></div>
+                </div>
+                <div class="kanban-column in-progress">
+                    <div class="kanban-column-header">
+                        In Arbeit <span class="count">0</span>
+                    </div>
+                    <div class="kanban-cards"></div>
+                </div>
+                <div class="kanban-column completed">
+                    <div class="kanban-column-header">
+                        Erledigt <span class="count">0</span>
+                    </div>
+                    <div class="kanban-cards"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communication Feed -->
+    <section class="section comms-section">
+        <div class="section-header">
+            <span class="section-title">Kommunikation</span>
+        </div>
+        <div class="section-body">
+            <div class="message-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- KPI Section -->
+    <section class="section kpi-section">
+        <div class="section-header">
+            <span class="section-title">Kennzahlen / KPIs</span>
+        </div>
+        <div class="section-body">
+            <div class="kpi-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports / Berichte -->
+    <section class="section reports-section">
+        <div class="section-header">
+            <span class="section-title">Berichte / Reports</span>
+        </div>
+        <div class="section-body">
+            <div class="report-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Viewer Modal -->
+    <div class="report-modal-overlay">
+        <div class="report-modal">
+            <div class="report-modal-header">
+                <span class="report-modal-title">Report</span>
+                <button class="report-modal-close">&times;</button>
+            </div>
+            <div class="report-modal-body">
+                <pre class="report-content"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Control Panel -->
+    <section class="section control-section">
+        <div class="section-header">
+            <span class="section-title">Neuen Task erstellen</span>
+        </div>
+        <div class="section-body">
+            <div class="control-panel">
+                <form class="task-form">
+                    <input type="text" id="task-title" placeholder="Task Titel (z.B. Marktanalyse erstellen)" required>
+                    <textarea id="task-desc" placeholder="Beschreibung (optional)"></textarea>
+                    <div class="form-row">
+                        <select id="task-assignee">
+                            <option value="">Automatisch zuweisen</option>
+                        </select>
+                        <select id="task-priority">
+                            <option value="low">Niedrig</option>
+                            <option value="medium" selected>Mittel</option>
+                            <option value="high">Hoch</option>
+                            <option value="critical">Kritisch</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Task erstellen</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Agent Detail Modal -->
+<div class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title">Agent</span>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-detail">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Task Detail Modal -->
+<div class="task-modal-overlay">
+    <div class="report-modal">
+        <div class="report-modal-header">
+            <span class="task-modal-title">Task Detail</span>
+            <button class="task-modal-close">&times;</button>
+        </div>
+        <div class="report-modal-body">
+            <div class="task-modal-meta"></div>
+            <pre class="task-modal-result"></pre>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast"></div>
+
+<script src="/static/js/app.js?v=5"></script>
+</body>
+</html>

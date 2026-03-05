@@ -1,0 +1,90 @@
+# ============================================
+# Workflow: Lead-to-Deal Conversion
+# ============================================
+# NEXUS AI Cross-Selling-Workflow fuer die Konvertierung von
+# Leads zu zahlenden Kunden ueber alle 5 Geschaeftsbereiche
+# (Beratung, Dev, Marketing, SaaS, Full-Service).
+
+workflow:
+  name: lead_to_deal_conversion
+  description: "Lead-Conversion: Qualifizierung, Cross-Sell-Analyse, Angebot, Nurturing und Abschluss"
+  version: "1.0"
+  metadata:
+    category: sales
+    estimated_duration_minutes: 90
+    trigger: "Neuer qualifizierter Lead oder Bestandskunde mit Erweiterungspotenzial"
+    company: nexus_ai
+
+  steps:
+    - id: lead_analyse
+      agent_role: sales
+      action: analyze_lead
+      description: >
+        Sales analysiert den Lead: Unternehmensgroesse, Branche,
+        Budget-Indikation, bestehende AI-Nutzung und Pain Points.
+        Klassifiziert den Lead als hot/warm/cold und identifiziert
+        relevante Geschaeftsbereiche (Beratung, Dev, Marketing,
+        SaaS oder Full-Service).
+      timeout_minutes: 10
+      retry_count: 2
+
+    - id: cross_sell_analyse
+      agent_role: ceo
+      action: evaluate_cross_sell_potential
+      description: >
+        CEO bewertet das Cross-Selling-Potenzial: Welche Kombination
+        aus den 5 Geschaeftsbereichen passt am besten? Priorisiert
+        den Einstiegsbereich und identifiziert Upsell-Pfade.
+      input_from: lead_analyse
+      timeout_minutes: 15
+
+    - id: angebotserstellung
+      agent_role: sales
+      action: create_tailored_proposal
+      description: >
+        Sales erstellt ein massgeschneidertes Angebot: Leistungsumfang
+        pro Geschaeftsbereich, Pricing-Modell (Festpreis/Retainer/
+        Subscription/Hybrid), Timeline und erwartete Ergebnisse.
+      input_from: cross_sell_analyse
+      timeout_minutes: 15
+
+    - id: finanz_pruefung
+      agent_role: cfo
+      action: validate_deal_economics
+      description: >
+        CFO prueft die Deal-Oekonomie: Margin-Analyse, Resource-
+        Anforderungen, Cashflow-Impact und strategischer Wert.
+        Gibt Freigabe oder fordert Anpassungen am Pricing.
+      input_from: angebotserstellung
+      timeout_minutes: 10
+
+    - id: nurturing_kampagne
+      agent_role: marketing
+      action: execute_nurturing_campaign
+      description: >
+        Marketing fuehrt eine personalisierte Nurturing-Kampagne:
+        Case Studies aus der relevanten Branche, Thought Leadership
+        Content, Demo-Einladung und ROI-Kalkulator.
+      input_from: finanz_pruefung
+      timeout_minutes: 15
+
+    - id: abschluss
+      agent_role: sales
+      action: close_deal
+      description: >
+        Sales fuehrt die Abschlussverhandlung: beantwortet letzte
+        Fragen, verhandelt Konditionen, erstellt Vertrag und
+        initiiert das Client Onboarding. Bei Ablehnung wird der
+        Grund fuer Pipeline-Optimierung dokumentiert.
+      input_from: nurturing_kampagne
+      timeout_minutes: 20
+
+    - id: onboarding_start
+      agent_role: support
+      action: initiate_client_onboarding
+      description: >
+        Support startet das Client-Onboarding: Kickoff-Termin,
+        Zugangseinrichtung, Ansprechpartner-Zuweisung und
+        Willkommenspaket mit Projektplan.
+      input_from: abschluss
+      timeout_minutes: 15

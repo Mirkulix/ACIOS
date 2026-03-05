@@ -1,0 +1,66 @@
+# ============================================
+# Workflow: Project Delivery
+# ============================================
+# Full software project delivery lifecycle from architecture
+# through deployment and client notification.
+
+workflow:
+  name: project_delivery
+  description: "Software project delivery: architect, implement, review, deploy, notify"
+  version: "1.0"
+  metadata:
+    category: engineering
+    estimated_duration_minutes: 180
+    trigger: "New project approved by CEO"
+
+  steps:
+    - id: plan_architecture
+      agent_role: cto
+      action: plan_architecture
+      description: >
+        CTO designs the technical architecture: tech stack selection,
+        system design, API contracts, data models, and creates
+        implementation tasks with estimates.
+      timeout_minutes: 30
+      retry_count: 2
+
+    - id: implement
+      agent_role: developer
+      action: implement_feature
+      description: >
+        Developer implements the solution based on the architecture
+        plan.  Writes code, unit tests, and documentation.  Outputs
+        a summary of changes and test results.
+      input_from: plan_architecture
+      timeout_minutes: 60
+      retry_count: 2
+
+    - id: code_review
+      agent_role: cto
+      action: review_code
+      description: >
+        CTO reviews the implementation for quality, security,
+        performance, and adherence to the architecture plan.
+        Returns approval or required changes.
+      input_from: implement
+      timeout_minutes: 20
+
+    - id: deploy
+      agent_role: operations
+      action: deploy_project
+      description: >
+        Operations deploys the reviewed and approved code to the
+        target environment.  Runs smoke tests and verifies the
+        deployment is healthy.
+      input_from: code_review
+      timeout_minutes: 20
+
+    - id: notify_client
+      agent_role: support
+      action: notify_client_delivery
+      description: >
+        Support notifies the client that the deliverable is ready.
+        Includes release notes, access instructions, and schedules
+        a walkthrough if needed.
+      input_from: deploy
+      timeout_minutes: 10

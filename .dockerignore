@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+.git
+.env
+data/state/*.db
+data/state/*.json
+data/logs/*
+data/knowledge/*
+.venv
+venv
+*.egg-info
+.pytest_cache
+tests/

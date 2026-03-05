@@ -1,0 +1,91 @@
+# ============================================
+# Workflow: KI-Feature-Entwicklung
+# ============================================
+# NEXUS AI Workflow fuer die Entwicklung und Ausrollung neuer
+# KI-Features -- sowohl fuer eigene SaaS-Produkte als auch
+# fuer Kunden-AI-Loesungen.
+
+workflow:
+  name: ki_feature_development
+  description: "KI-Feature-Entwicklungspipeline: Konzeption, Architektur, Implementierung, Testing und Rollout"
+  version: "1.0"
+  metadata:
+    category: engineering
+    estimated_duration_minutes: 240
+    trigger: "Neues KI-Feature im Produkt-Backlog priorisiert oder Kundenanforderung"
+    company: nexus_ai
+
+  steps:
+    - id: feature_konzeption
+      agent_role: ceo
+      action: define_feature_scope
+      description: >
+        CEO definiert den Feature-Scope basierend auf Kundenfeedback,
+        Marktstrategie oder interner Produkt-Roadmap. Legt Erfolgskriterien,
+        Zielgruppe und erwarteten Business Impact fest. Erstellt ein
+        Feature-Brief mit klaren Akzeptanzkriterien.
+      timeout_minutes: 20
+      retry_count: 2
+
+    - id: technische_architektur
+      agent_role: cto
+      action: design_ki_architecture
+      description: >
+        CTO entwirft die technische KI-Architektur: Modellauswahl
+        (Claude/OpenAI/Open Source), API-Design, Datenfluss, Prompt-
+        Engineering-Strategie, Datenschutz-Anforderungen (DSGVO)
+        und Skalierungsplan.
+      input_from: feature_konzeption
+      timeout_minutes: 30
+      retry_count: 2
+
+    - id: kosten_analyse
+      agent_role: cfo
+      action: analyze_feature_costs
+      description: >
+        CFO berechnet die Kosten des Features: API-Kosten (Token-
+        Verbrauch), Entwicklungsaufwand, Infrastrukturkosten und
+        erwarteter ROI. Gibt Budgetfreigabe oder fordert Anpassungen.
+      input_from: technische_architektur
+      timeout_minutes: 15
+
+    - id: implementierung
+      agent_role: developer
+      action: implement_ki_feature
+      description: >
+        Developer implementiert das KI-Feature gemaess Architekturplan.
+        Integration der AI-APIs, Prompt-Engineering, Unit-Tests,
+        DSGVO-konforme Datenverarbeitung und API-Dokumentation.
+      input_from: kosten_analyse
+      timeout_minutes: 60
+      retry_count: 2
+
+    - id: qualitaetspruefung
+      agent_role: cto
+      action: review_ki_implementation
+      description: >
+        CTO prueft die Implementierung auf Code-Qualitaet, Security
+        (besonders AI-Safety und Prompt-Injection-Schutz), Performance
+        und Einhaltung der Architekturvorgaben.
+      input_from: implementierung
+      timeout_minutes: 20
+
+    - id: beta_rollout
+      agent_role: operations
+      action: deploy_beta_feature
+      description: >
+        Operations rollt das Feature im Beta-Modus aus. Konfiguriert
+        Feature-Flags, Monitoring, Alerting und Feedback-Erfassung.
+        Bei Kundenprojekten: Staging-Deployment fuer Kundenabnahme.
+      input_from: qualitaetspruefung
+      timeout_minutes: 20
+
+    - id: feature_ankuendigung
+      agent_role: marketing
+      action: announce_ki_feature
+      description: >
+        Marketing erstellt die Feature-Ankuendigung: Release-Notes,
+        Blog-Post, Social Media Content, Case Study und ggf.
+        Thought-Leadership-Artikel ueber den AI-Ansatz.
+      input_from: beta_rollout
+      timeout_minutes: 15

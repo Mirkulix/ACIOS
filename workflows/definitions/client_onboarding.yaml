@@ -1,0 +1,55 @@
+# ============================================
+# Workflow: Client Onboarding
+# ============================================
+# Handles the full process of onboarding a new client,
+# from initial qualification through to welcome communication.
+
+workflow:
+  name: client_onboarding
+  description: "End-to-end client onboarding: qualify, approve, set up, and welcome"
+  version: "1.0"
+  metadata:
+    category: sales
+    estimated_duration_minutes: 60
+    trigger: "New client inquiry received"
+
+  steps:
+    - id: qualify_lead
+      agent_role: sales
+      action: qualify_lead
+      description: >
+        Sales agent evaluates the incoming lead.  Gathers requirements,
+        assesses fit, estimates deal size, and produces a qualification
+        summary with a go/no-go recommendation.
+      timeout_minutes: 15
+      retry_count: 2
+
+    - id: ceo_approval
+      agent_role: ceo
+      action: approve_client
+      description: >
+        CEO reviews the qualification summary and decides whether to
+        accept the client.  For deals above the threshold the CEO may
+        request additional information before approving.
+      input_from: qualify_lead
+      timeout_minutes: 10
+
+    - id: setup_operations
+      agent_role: operations
+      action: setup_client_project
+      description: >
+        Operations creates the project workspace, sets up tracking,
+        assigns internal resources, and prepares the onboarding
+        checklist.
+      input_from: ceo_approval
+      timeout_minutes: 20
+
+    - id: send_welcome
+      agent_role: support
+      action: send_welcome_package
+      description: >
+        Support sends the welcome email/package to the new client
+        including credentials, onboarding guide, point-of-contact
+        details, and next-steps timeline.
+      input_from: setup_operations
+      timeout_minutes: 10

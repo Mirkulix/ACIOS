@@ -1,0 +1,55 @@
+# ============================================
+# Workflow: Content Pipeline
+# ============================================
+# Plans, creates, reviews, and publishes content across channels.
+
+workflow:
+  name: content_pipeline
+  description: "Content creation pipeline: plan, create, review, and publish"
+  version: "1.0"
+  metadata:
+    category: marketing
+    estimated_duration_minutes: 90
+    trigger: "Content calendar entry or manual request"
+
+  steps:
+    - id: plan_content
+      agent_role: marketing
+      action: plan_content
+      description: >
+        Marketing agent researches the topic, identifies the target
+        audience, selects the content format (blog, social, newsletter),
+        and produces a detailed content brief with outline and key
+        messages.
+      timeout_minutes: 20
+      retry_count: 2
+
+    - id: create_content
+      agent_role: marketing
+      action: create_content
+      description: >
+        Marketing agent writes the full content piece based on the
+        approved brief.  Includes copy, suggested visuals, hashtags,
+        and platform-specific formatting.
+      input_from: plan_content
+      timeout_minutes: 30
+
+    - id: review_content
+      agent_role: ceo
+      action: review_content
+      description: >
+        CEO reviews the draft for brand alignment, messaging accuracy,
+        and strategic fit.  Returns approval, revision requests, or
+        rejection with notes.
+      input_from: create_content
+      timeout_minutes: 15
+
+    - id: publish_content
+      agent_role: marketing
+      action: publish_content
+      description: >
+        Marketing publishes the approved content to the designated
+        channels and schedules any follow-up posts or engagement
+        monitoring tasks.
+      input_from: review_content
+      timeout_minutes: 10

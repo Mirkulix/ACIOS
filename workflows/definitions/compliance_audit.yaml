@@ -1,0 +1,79 @@
+# ============================================
+# Workflow: AI-Loesung Qualitaets-Audit
+# ============================================
+# NEXUS AI Workflow fuer die Qualitaetssicherung ausgelieferter
+# AI-Loesungen bei Kunden -- inklusive Performance-Monitoring,
+# Modell-Evaluation und Optimierungsempfehlungen.
+
+workflow:
+  name: ai_solution_audit
+  description: "AI-Loesung Qualitaets-Audit: Performance-Check, Modell-Evaluation, Optimierung und Kundenbericht"
+  version: "1.0"
+  metadata:
+    category: operations
+    estimated_duration_minutes: 120
+    trigger: "Geplanter Audit-Termin oder Kunden-Eskalation wegen AI-Performance"
+    company: nexus_ai
+
+  steps:
+    - id: audit_vorbereitung
+      agent_role: operations
+      action: prepare_ai_audit
+      description: >
+        Operations sammelt alle relevanten Daten der Kunden-AI-Loesung:
+        Nutzungsstatistiken, Fehlerraten, Latenz-Metriken, Kosten-
+        Tracking und Kundenfeedback. Erstellt eine Audit-Checkliste.
+      timeout_minutes: 20
+      retry_count: 2
+
+    - id: technische_analyse
+      agent_role: cto
+      action: analyze_ai_performance
+      description: >
+        CTO fuehrt die technische Performance-Analyse durch: Modell-
+        Accuracy, Halluzinationsrate, Prompt-Effizienz, API-Kosten
+        pro Request, Latenz und Skalierungsverhalten. Identifiziert
+        technische Optimierungspotenziale.
+      input_from: audit_vorbereitung
+      timeout_minutes: 25
+
+    - id: kosten_review
+      agent_role: cfo
+      action: review_solution_economics
+      description: >
+        CFO analysiert die Wirtschaftlichkeit der Loesung: Ist-Kosten
+        vs. Budget, API-Kosten-Trends, Profitabilitaet des Engagements
+        und Optimierungspotenziale bei der Token-Nutzung.
+      input_from: technische_analyse
+      timeout_minutes: 15
+
+    - id: audit_bericht
+      agent_role: operations
+      action: generate_audit_report
+      description: >
+        Operations erstellt den vollstaendigen Audit-Bericht mit
+        Performance-Score, Optimierungsempfehlungen, Kosten-Analyse
+        und priorisierten Handlungsempfehlungen in kundenfreundlichem
+        Format.
+      input_from: kosten_review
+      timeout_minutes: 20
+
+    - id: massnahmenplan
+      agent_role: ceo
+      action: approve_optimization_plan
+      description: >
+        CEO prueft den Massnahmenplan und genehmigt empfohlene
+        Optimierungen: Modell-Upgrades, Prompt-Refactoring, Architektur-
+        Anpassungen oder Preis-Neuverhandlungen.
+      input_from: audit_bericht
+      timeout_minutes: 15
+
+    - id: kunden_praesenation
+      agent_role: support
+      action: deliver_audit_results
+      description: >
+        Support praesentiert dem Kunden die Audit-Ergebnisse, den
+        Optimierungsplan und die naechsten Schritte. Plant ggf. ein
+        Beratungsgespraech und richtet Nachverfolgung ein.
+      input_from: massnahmenplan
+      timeout_minutes: 15

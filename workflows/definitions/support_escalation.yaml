@@ -1,0 +1,69 @@
+# ============================================
+# Workflow: Support Escalation
+# ============================================
+# Handles incoming support tickets with automatic escalation
+# to CTO or CEO when first-line resolution fails.
+
+workflow:
+  name: support_escalation
+  description: "Support ticket handling with automatic escalation on failure"
+  version: "1.0"
+  metadata:
+    category: support
+    estimated_duration_minutes: 45
+    trigger: "New support ticket or customer issue received"
+
+  steps:
+    - id: receive_ticket
+      agent_role: support
+      action: receive_support_ticket
+      description: >
+        Support agent receives and categorizes the incoming ticket.
+        Assesses severity, identifies the product area, and logs
+        initial details.
+      timeout_minutes: 5
+      retry_count: 1
+
+    - id: attempt_resolution
+      agent_role: support
+      action: resolve_ticket
+      description: >
+        Support agent attempts to resolve the issue using the
+        knowledge base, past tickets, and standard procedures.
+        If resolved, produces a resolution summary.  If not,
+        marks the step as failed to trigger escalation.
+      input_from: receive_ticket
+      timeout_minutes: 20
+      retry_count: 2
+
+    - id: escalate_to_cto
+      agent_role: cto
+      action: handle_escalation
+      description: >
+        CTO investigates the technical issue that support could not
+        resolve.  Performs deeper analysis, identifies root cause,
+        and provides a technical resolution or workaround.
+      input_from: attempt_resolution
+      timeout_minutes: 30
+      condition: "previous.failed"
+
+    - id: escalate_to_ceo
+      agent_role: ceo
+      action: executive_escalation
+      description: >
+        CEO handles business-critical escalations that require
+        executive decision-making, such as SLA breaches, refund
+        decisions, or strategic client issues.
+      input_from: escalate_to_cto
+      timeout_minutes: 15
+      condition: "previous.failed"
+
+    - id: follow_up
+      agent_role: support
+      action: follow_up_ticket
+      description: >
+        Support follows up with the customer to confirm the issue
+        is resolved, collects satisfaction feedback, and closes
+        the ticket.
+      input_from: attempt_resolution
+      timeout_minutes: 10

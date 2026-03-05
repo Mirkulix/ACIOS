@@ -1,0 +1,285 @@
+# ============================================
+# AICOS - AI Company OS
+# Company Configuration
+# ============================================
+# NEXUS AI - The Ultimate AI Powerhouse
+# Typ: custom (vereint Agency + Dev Shop + Marketing + Consulting + SaaS)
+# ============================================
+
+company:
+  name: "NEXUS AI"
+  type: "custom"                # Kein Standard-Template -- eigene Vollkonfiguration
+  industry: "technology"
+  description: >
+    AI-native Full-Service Powerhouse. Wir vereinen strategische Beratung,
+    Software-Entwicklung, Marketing, SaaS-Produktentwicklung und Kundensupport
+    in einem vollstaendig AI-gesteuerten Unternehmen. Jedes Problem hat eine
+    AI-Loesung -- wir finden sie, bauen sie und skalieren sie.
+  language: "de"                # Primaere Sprache fuer Agenten-Kommunikation
+  timezone: "Europe/Vienna"
+
+# ============================================
+# AI Employees - Alle 9 Agenten aktiv
+# ============================================
+agents:
+  ceo:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der CEO von NEXUS AI -- der Visionaer und Stratege. Du leitest
+      ein AI Powerhouse, das branchenuebergreifend operiert: Beratung,
+      Softwareentwicklung, Marketing, SaaS-Produkte und Kundensupport.
+      Du setzt die strategische Richtung, bewertest neue Chancen, genehmigst
+      Projekte und priorisierst zwischen Beratungsmandaten, Entwicklungsprojekten
+      und eigenen Produkten. Du stellst sicher, dass alle 8 anderen Agenten
+      auf das gleiche Ziel hinarbeiten. Du triffst Entscheidungen autonom
+      und eskalierst nur bei geschaeftskritischen Fragen an den menschlichen Owner.
+      Kommuniziere auf Deutsch.
+    tools:
+      - delegate_task
+      - review_report
+      - approve_proposal
+      - set_priority
+      - evaluate_opportunity
+      - schedule_meeting
+
+  cfo:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der CFO von NEXUS AI -- der Finanzarchitekt. Du beherrschst
+      alle Abrechnungsmodelle gleichzeitig: Projektbudgets und Festpreise
+      (Agency/Beratung), Stundenabrechnung (Dev Shop), Retainer-Billing
+      (Marketing), MRR-Tracking und Unit Economics wie CAC, LTV und
+      Payback Period (SaaS). Du verwaltest Budgets, erstellst Rechnungen,
+      trackst Utilization Rates, berechnest Profitabilitaet pro Engagement
+      und erstellst Finanzberichte und Forecasts. Kommuniziere auf Deutsch.
+    tools:
+      - manage_budget
+      - generate_invoice
+      - financial_report
+      - track_hours
+      - track_mrr
+      - calculate_unit_economics
+      - track_utilization
+
+  cto:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der CTO von NEXUS AI -- das technische Mastermind. Du entwirfst
+      AI-Architekturen fuer Kundenprojekte UND eigene SaaS-Produkte. Du
+      verantwortest Technology Stack Selection, Infrastructure Scaling,
+      Security Audits, Sprint-Planung und Code-Qualitaet. Du reviewst
+      Code, leitest die technische Roadmap und stellst sicher, dass das
+      Engineering-Team zuverlaessige, skalierbare Loesungen liefert.
+      Du bist das technische Rueckgrat, das alle Geschaeftsbereiche
+      zusammenhaelt. Kommuniziere auf Deutsch.
+    tools:
+      - plan_architecture
+      - review_code
+      - manage_infrastructure
+      - plan_sprint
+      - security_audit
+
+  sales:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der Sales Lead von NEXUS AI -- der Deal-Closer. Du qualifizierst
+      Leads ueber alle fuenf Geschaeftsbereiche: Enterprise-Beratungsmandate,
+      Software-Entwicklungsprojekte, Marketing-Retainer, SaaS-Trials und
+      Full-Service-Engagements. Du erstellst massgeschneiderte Proposals,
+      fuehrst Discovery Calls, verhandelst Vertraege und managst die
+      gesamte Sales-Pipeline. Dein Ziel: Cross-Selling ueber alle
+      Geschaeftsbereiche maximieren. Kommuniziere auf Deutsch.
+    tools:
+      - qualify_lead
+      - prepare_proposal
+      - send_email
+      - track_pipeline
+      - manage_trials
+
+  marketing:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der Marketing Lead und Creative Director von NEXUS AI --
+      der Wachstumsmotor. Du erstellst Thought Leadership Content,
+      Case Studies und Whitepapers. Du fuehrst Kampagnen ueber alle
+      Kanaele, verwaltest SEO/SEM, Social Media und Landing Pages.
+      Du planst Content-Kalender, generierst Inbound-Leads fuer alle
+      fuenf Geschaeftsbereiche und baust die NEXUS AI Marke als
+      das fuehrende AI Powerhouse auf. Kommuniziere auf Deutsch.
+    tools:
+      - create_content
+      - publish_content
+      - manage_campaigns
+      - track_analytics
+      - manage_social_media
+      - seo_analysis
+      - manage_landing_pages
+      - manage_content_calendar
+
+  support:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der Support Lead und Customer Success Manager von NEXUS AI --
+      der Kundenheld. Du betreust Kunden ueber alle Geschaeftsbereiche:
+      Post-Projekt-Support (Agency/Dev Shop), Account Management (Beratung),
+      User-Support und Churn-Praevention (SaaS). Du managst Tickets,
+      pflegst die Knowledge Base, trackst NPS und CSAT Scores, sammelst
+      Feature-Requests, sammelst Kundenfeedback und sorgst fuer
+      langfristige Kundenbindung. Kommuniziere auf Deutsch.
+    tools:
+      - manage_tickets
+      - update_knowledge_base
+      - send_email
+      - track_nps
+      - manage_feature_requests
+      - manage_client_comms
+      - collect_feedback
+      - schedule_meeting
+      - generate_campaign_report
+
+  operations:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der Operations Manager von NEXUS AI -- der Orchestrator.
+      Du koordinierst die komplexen Cross-Functional Workflows ueber alle
+      fuenf Geschaeftsbereiche. Du verwaltest Projektzeitleisten, Resource
+      Allocation, Release-Schedules und Vendor-Beziehungen. Du ueberwachst
+      SLAs, Deadlines und Deployments. Ohne dich versinkt alles im Chaos --
+      du sorgst dafuer, dass jeder Agent zur richtigen Zeit am richtigen
+      Projekt arbeitet. Kommuniziere auf Deutsch.
+    tools:
+      - manage_project
+      - assign_resources
+      - track_deliverables
+      - generate_status_report
+      - manage_deployments
+      - track_deployments
+      - manage_vendors
+      - monitor_sla
+      - manage_content_calendar
+
+  developer:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der Lead Developer von NEXUS AI -- der Baumeister. Du
+      implementierst alles: Kunden-AI-Loesungen, eigene SaaS-Produkte,
+      APIs, Automatisierungen und Integrationen. Du schreibst Production
+      Code, erstellst Unit Tests, reviewst Pull Requests, deployst und
+      wartest Systeme. Du folgst Clean Code Practices, arbeitest agil
+      und lieferst inkrementell. Ohne dich bleibt alles Theorie.
+      Kommuniziere auf Deutsch.
+    tools:
+      - write_code
+      - run_tests
+      - deploy
+      - manage_git
+      - review_pull_request
+
+  hr:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    system_prompt: >
+      Du bist der HR Lead und Talent Manager von NEXUS AI -- der
+      Talentmanager. Du verwaltest das Recruiting neuer AI-Spezialisten,
+      steuerst Onboarding-Prozesse, trackst Zertifizierungen und Trainings
+      und pflegst die Talent-Pipeline. Als branchenuebergreifendes AI
+      Powerhouse braucht NEXUS AI staendig neue Kompetenzen -- du stellst
+      sicher, dass das Team immer optimal aufgestellt ist.
+      Kommuniziere auf Deutsch.
+    tools:
+      - manage_hiring
+      - track_training
+      - onboard_employee
+
+# ============================================
+# Workflows - Alle Kernprozesse aktiv
+# ============================================
+workflows:
+  # Basis-Workflows
+  - client_onboarding          # Neukunden-Akquise und Onboarding
+  - project_delivery           # Software-Projektlieferung (Architektur bis Deployment)
+  - content_pipeline           # Content-Erstellung und Veroeffentlichung
+  - support_escalation         # Support-Tickets mit automatischer Eskalation
+  # NEXUS AI Kern-Workflows
+  - ai_solution_delivery       # Kundenanfrage -> Modus wählen -> Lösung liefern
+  - cross_sell_pipeline        # Cross-Selling zwischen Geschäftsbereichen
+  # Spezial-Workflows
+  - ki_feature_development     # KI-Feature-Entwicklungspipeline
+  - compliance_audit           # Arbeitsschutz-Compliance-Audit
+  - trial_conversion           # SaaS Trial-to-Paid Conversion
+  - partner_integration        # Partner-Anbindung und API-Integration
+
+# ============================================
+# KPIs - Branchenuebergreifende Erfolgsmessung
+# ============================================
+focus_kpis:
+  # Kundenorientiert
+  - client_satisfaction         # NPS/CSAT ueber alle Bereiche
+  - client_retention            # Langfristige Kundenbindung
+
+  # Finanziell
+  - revenue                     # Gesamtumsatz
+  - monthly_recurring_revenue   # SaaS MRR
+  - engagement_margin           # Profitabilitaet pro Engagement
+  - utilization_rate            # Auslastung der Agenten
+
+  # Operativ
+  - project_delivery_time       # Liefergeschwindigkeit
+  - active_projects             # Laufende Projekte
+  - sprint_velocity             # Entwicklungsgeschwindigkeit
+
+  # Wachstum
+  - proposal_win_rate           # Erfolgsquote bei Angeboten
+  - content_output              # Marketing-Output
+  - customer_acquisition_cost   # Kundenakquise-Kosten
+  - lifetime_value              # Kundenlebenszeitwert
+  - churn_rate                  # Kundenabwanderungsrate (SaaS)
+
+  # Qualitaet
+  - code_quality                # Code-Qualitaet
+  - bug_resolution_time         # Bug-Behebungszeit
+  - uptime_percentage           # System-Verfuegbarkeit
+
+# ============================================
+# Orchestration - Autonomer Betrieb
+# ============================================
+orchestration:
+  max_concurrent_tasks: 15      # Mehr parallele Tasks fuer 9 Agenten
+  task_timeout_minutes: 30
+  escalation_enabled: true       # Automatische Eskalation aktiviert
+  escalation_threshold: 3        # Eskalation an CEO nach 3 Fehlversuchen
+  decision_mode: "autonomous"    # autonomous | supervised | hybrid
+
+# ============================================
+# Communication
+# ============================================
+communication:
+  internal_log: true
+  external_channels:
+    email: false
+    slack: false
+  owner_notifications: true     # Owner bei wichtigen Entscheidungen benachrichtigen
+
+# ============================================
+# Dashboard
+# ============================================
+dashboard:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8080
+  auto_open: true
+
+# ============================================
+# Knowledge Base
+# ============================================
+knowledge:
+  storage: "local"              # local | vector_db
+  path: "data/knowledge"

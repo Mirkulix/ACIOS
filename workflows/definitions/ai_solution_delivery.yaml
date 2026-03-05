@@ -1,0 +1,99 @@
+# ============================================
+# Workflow: AI Solution Delivery
+# ============================================
+# NEXUS AI Kern-Workflow: Von der Kundenanfrage zur fertigen
+# AI-Lösung. Der CEO wählt den Geschäftsmodus und das gesamte
+# Team liefert branchenübergreifend.
+
+workflow:
+  name: ai_solution_delivery
+  description: "NEXUS AI Kern-Workflow: Anfrage bewerten, Modus wählen, Lösung liefern"
+  version: "1.0"
+  metadata:
+    category: core
+    estimated_duration_minutes: 180
+    trigger: "Neue Kundenanfrage oder internes Projekt gestartet"
+
+  steps:
+    - id: anfrage_bewertung
+      agent_role: ceo
+      action: evaluate_request
+      description: >
+        CEO bewertet die neue Anfrage und entscheidet den Geschäftsmodus:
+        Consulting (Beratung), Dev Shop (Software), Marketing (Content/Kampagnen),
+        SaaS (Produktentwicklung) oder Full Power (alle Bereiche). Definiert
+        Scope, Erfolgskriterien und Team-Zusammensetzung.
+      timeout_minutes: 20
+      retry_count: 2
+
+    - id: technischer_loesungsansatz
+      agent_role: cto
+      action: design_solution
+      description: >
+        CTO erstellt den technischen Lösungsansatz: Architektur, Tech-Stack,
+        AI-Modelle, APIs, Infrastruktur und Skalierungsplan. Definiert
+        technische Machbarkeit und Risiken.
+      input_from: anfrage_bewertung
+      timeout_minutes: 30
+      retry_count: 2
+
+    - id: budget_und_roi
+      agent_role: cfo
+      action: calculate_budget
+      description: >
+        CFO kalkuliert Budget und ROI: Entwicklungskosten, laufende Kosten
+        (API, Infrastruktur), erwarteter Umsatz, Break-Even-Zeitpunkt und
+        Profit-Marge. Gibt Budgetfreigabe oder fordert Anpassungen.
+      input_from: technischer_loesungsansatz
+      timeout_minutes: 15
+
+    - id: proposal_erstellung
+      agent_role: sales
+      action: create_proposal
+      description: >
+        Sales erstellt ein maßgeschneidertes Proposal für den Kunden:
+        Executive Summary, Lösungsbeschreibung, Timeline, Pricing,
+        Erfolgsgarantien und nächste Schritte. Verhandelt bei Bedarf.
+      input_from: budget_und_roi
+      timeout_minutes: 20
+
+    - id: umsetzung
+      agent_role: developer
+      action: implement_solution
+      description: >
+        Developer setzt die Lösung um: Code-Entwicklung, API-Integration,
+        AI-Modell-Training/Fine-Tuning, Testing und Dokumentation.
+        Arbeitet in Sprints mit regelmäßigen CTO-Reviews.
+      input_from: proposal_erstellung
+      timeout_minutes: 60
+      retry_count: 2
+
+    - id: marketing_begleitung
+      agent_role: marketing
+      action: create_launch_materials
+      description: >
+        Marketing erstellt parallel Launch-Materialien: Case Study,
+        Produktbeschreibung, Demo-Video-Script und Social Media Posts.
+        Bereitet die Kommunikation für den Go-Live vor.
+      input_from: proposal_erstellung
+      timeout_minutes: 20
+
+    - id: kundenuebergabe
+      agent_role: support
+      action: handover_to_customer
+      description: >
+        Support übergibt die fertige Lösung an den Kunden: Einführung,
+        Schulung, Dokumentation, Support-Kanäle einrichten und
+        Feedback-Loop starten. Plant regelmäßige Check-ins.
+      input_from: umsetzung
+      timeout_minutes: 20
+
+    - id: monitoring_und_optimierung
+      agent_role: operations
+      action: monitor_and_optimize
+      description: >
+        Operations monitort die Lösung im Live-Betrieb: Performance,
+        Uptime, Kosten, Nutzungsmetriken. Identifiziert Optimierungspotenzial
+        und Upsell-Möglichkeiten für den Support-Agent.
+      input_from: kundenuebergabe
+      timeout_minutes: 15
